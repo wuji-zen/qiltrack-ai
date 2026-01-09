@@ -1,950 +1,541 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Qiltrack AI - Understand Any Company in 3 Minutes</title>
-  <meta name="description" content="AI-powered platform to understand any company in minutes. Business education made simple.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            'display': ['Outfit', 'sans-serif'],
-            'mono': ['JetBrains Mono', 'monospace'],
-          },
-          colors: {
-            'dark': {
-              '900': '#0a0a0f',
-              '800': '#12121a',
-              '700': '#1a1a24',
-              '600': '#24243a',
-            },
-            'accent': {
-              'purple': '#667eea',
-              'violet': '#764ba2',
-              'pink': '#f093fb',
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO & Meta Tags -->
+    <title>Qiltrack AI - 3分钟读懂任何公司的智能投研平台</title>
+    <meta name="description" content="Qiltrack AI 是您的智能投研助手。搭载 Qiltrack Financial Engine™ 自研金融大模型，基于海量财报与实时行情训练，将复杂数据转化为清晰的投资洞察。">
+    <meta name="keywords" content="AI投研, 自研金融大模型, 股票分析软件, 美股财报分析, 港股投资工具, 价值投资工具, 智能投顾">
+    <meta name="author" content="Qiltrack AI">
+    <link rel="canonical" href="https://qiltrack.com">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://qiltrack.com/">
+    <meta property="og:title" content="Qiltrack AI - 重新定义投资研究">
+    <meta property="og:description" content="专业机构级别的 AI 投研分析。3分钟生成深度报告，搭载自研金融垂直模型，让投资决策更明智。">
+    <meta property="og:image" content="https://qiltrack.com/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://qiltrack.com/">
+    <meta property="twitter:title" content="Qiltrack AI - 智能投研的新标准">
+    <meta property="twitter:description" content="不只是数据堆砌，更是深度洞察。体验下一代 AI 辅助投资分析。">
+    <meta property="twitter:image" content="https://qiltrack.com/twitter-image.jpg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Qiltrack AI",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "AI-powered stock research platform powered by proprietary financial models.",
+      "featureList": "Proprietary Financial Engine, Instant Analysis, Global Market Coverage"
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        background: '#030014',
+                        surface: '#0F0F1B',
+                        primary: '#5B21B6', // Violet 800
+                        accent: '#8B5CF6', // Violet 500
+                        success: '#10B981',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
             }
-          }
         }
-      }
-    }
-  </script>
-  <style>
-    * {
-      font-family: 'Outfit', sans-serif;
-    }
+    </script>
 
-    body {
-      background: #0a0a0f;
-      color: #fff;
-      overflow-x: hidden;
-    }
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-    /* Animated gradient background */
-    .gradient-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: -1;
-      overflow: hidden;
-    }
+    <!-- Styles -->
+    <style>
+        body {
+            background-color: #030014;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
 
-    .gradient-orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.5;
-      animation: float 20s ease-in-out infinite;
-    }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030014;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
 
-    .orb-1 {
-      width: 600px;
-      height: 600px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      top: -200px;
-      left: -100px;
-      animation-delay: 0s;
-    }
+        /* Glassmorphism Utilities */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .glass-nav {
+            background: rgba(3, 0, 20, 0.7);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
 
-    .orb-2 {
-      width: 500px;
-      height: 500px;
-      background: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
-      top: 50%;
-      right: -150px;
-      animation-delay: -5s;
-    }
+        /* Mesh Gradient Background */
+        .mesh-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .mesh-blob {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.4;
+            border-radius: 50%;
+            animation: float 10s infinite ease-in-out;
+        }
+        .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #4c1d95; animation-delay: 0s; }
+        .blob-2 { bottom: -10%; right: -10%; width: 50vw; height: 50vw; background: #1e1b4b; animation-delay: -5s; }
+        .blob-3 { top: 40%; left: 40%; width: 30vw; height: 30vw; background: #5b21b6; animation-delay: -2s; opacity: 0.2; }
 
-    .orb-3 {
-      width: 400px;
-      height: 400px;
-      background: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
-      bottom: -100px;
-      left: 30%;
-      animation-delay: -10s;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      25% { transform: translate(50px, -50px) scale(1.1); }
-      50% { transform: translate(-30px, 30px) scale(0.95); }
-      75% { transform: translate(40px, 40px) scale(1.05); }
-    }
-
-    /* Glass effect */
-    .glass {
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .glass-strong {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(40px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    /* Gradient text */
-    .gradient-text {
-      background: linear-gradient(135deg, #667eea 0%, #f093fb 50%, #667eea 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: gradient-shift 8s ease infinite;
-    }
-
-    @keyframes gradient-shift {
-      0%, 100% { background-position: 0% center; }
-      50% { background-position: 200% center; }
-    }
-
-    /* Button glow */
-    .btn-glow {
-      position: relative;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      transition: all 0.3s ease;
-    }
-
-    .btn-glow::before {
-      content: '';
-      position: absolute;
-      inset: -2px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      border-radius: inherit;
-      filter: blur(15px);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      z-index: -1;
-    }
-
-    .btn-glow:hover::before {
-      opacity: 0.7;
-    }
-
-    .btn-glow:hover {
-      transform: translateY(-2px);
-    }
-
-    /* Card hover effects */
-    .feature-card {
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .feature-card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(102, 126, 234, 0.3);
-      box-shadow: 0 20px 40px rgba(102, 126, 234, 0.15);
-    }
-
-    .feature-card:hover .icon-wrapper {
-      transform: scale(1.1) rotate(5deg);
-    }
-
-    .icon-wrapper {
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    /* Pricing card */
-    .pricing-card {
-      transition: all 0.3s ease;
-    }
-
-    .pricing-card.featured {
-      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-      border-color: rgba(102, 126, 234, 0.3);
-    }
-
-    .pricing-card:hover {
-      transform: translateY(-4px);
-    }
-
-    /* FAQ accordion */
-    .faq-item {
-      transition: all 0.3s ease;
-    }
-
-    .faq-item:hover {
-      border-color: rgba(102, 126, 234, 0.3);
-    }
-
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease, padding 0.3s ease;
-    }
-
-    .faq-item.active .faq-answer {
-      max-height: 200px;
-      padding-top: 1rem;
-    }
-
-    .faq-item.active .faq-icon {
-      transform: rotate(45deg);
-    }
-
-    .faq-icon {
-      transition: transform 0.3s ease;
-    }
-
-    /* Scroll animations */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Mockup styling */
-    .mockup-container {
-      perspective: 1000px;
-    }
-
-    .mockup {
-      transform: rotateX(10deg) rotateY(-5deg);
-      transition: transform 0.5s ease;
-    }
-
-    .mockup:hover {
-      transform: rotateX(5deg) rotateY(0deg);
-    }
-
-    /* Grid pattern */
-    .grid-pattern {
-      background-image:
-        linear-gradient(rgba(102, 126, 234, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(102, 126, 234, 0.03) 1px, transparent 1px);
-      background-size: 60px 60px;
-    }
-
-    /* Shine effect */
-    .shine {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .shine::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(
-        to right,
-        transparent 0%,
-        rgba(255, 255, 255, 0.05) 50%,
-        transparent 100%
-      );
-      transform: rotate(30deg);
-      animation: shine 6s ease-in-out infinite;
-    }
-
-    @keyframes shine {
-      0%, 100% { transform: rotate(30deg) translateX(-100%); }
-      50% { transform: rotate(30deg) translateX(100%); }
-    }
-
-    /* Smooth scroll */
-    html {
-      scroll-behavior: smooth;
-    }
-
-    /* Number counter */
-    .stat-number {
-      font-variant-numeric: tabular-nums;
-    }
-
-    /* Custom scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: #0a0a0f;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      border-radius: 4px;
-    }
-  </style>
+        /* Typography Utilities */
+        .text-gradient {
+            background: linear-gradient(135deg, #fff 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Grid Utilities */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 1.5rem;
+        }
+        @media (min-width: 768px) {
+            .bento-grid {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(2, minmax(250px, auto));
+            }
+        }
+        
+        .bento-card {
+            background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 1.5rem;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+        }
+        .bento-card:hover {
+            border-color: rgba(139, 92, 246, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.5);
+        }
+        
+        .card-glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top right, rgba(139, 92, 246, 0.1), transparent 40%);
+            pointer-events: none;
+        }
+    </style>
 </head>
-<body class="antialiased">
-  <!-- Animated Background -->
-  <div class="gradient-bg">
-    <div class="gradient-orb orb-1"></div>
-    <div class="gradient-orb orb-2"></div>
-    <div class="gradient-orb orb-3"></div>
-  </div>
+<body class="antialiased selection:bg-accent selection:text-white">
 
-  <!-- Grid Pattern Overlay -->
-  <div class="fixed inset-0 grid-pattern pointer-events-none z-0"></div>
-
-  <!-- Navigation -->
-  <nav class="fixed top-0 w-full z-50 px-6 py-4">
-    <div class="max-w-6xl mx-auto">
-      <div class="glass-strong rounded-2xl px-6 py-3 flex justify-between items-center">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-accent-purple to-accent-violet flex items-center justify-center">
-            <span class="font-bold text-lg">Q</span>
-          </div>
-          <span class="font-semibold text-xl tracking-tight">Qiltrack</span>
-          <span class="px-2 py-0.5 text-xs font-mono bg-accent-purple/20 text-accent-purple rounded-md">AI</span>
+    <!-- Background Elements -->
+    <div class="fixed inset-0 z-[-1]">
+        <div class="mesh-bg">
+            <div class="mesh-blob blob-1"></div>
+            <div class="mesh-blob blob-2"></div>
+            <div class="mesh-blob blob-3"></div>
         </div>
-        <div class="hidden md:flex items-center gap-8">
-          <a href="#features" class="text-sm text-gray-400 hover:text-white transition">Features</a>
-          <a href="#how-it-works" class="text-sm text-gray-400 hover:text-white transition">How It Works</a>
-          <a href="#pricing" class="text-sm text-gray-400 hover:text-white transition">Pricing</a>
-          <a href="#faq" class="text-sm text-gray-400 hover:text-white transition">FAQ</a>
-        </div>
-        <a href="https://qiltrack.com" target="_blank" class="btn-glow px-5 py-2.5 rounded-xl font-medium text-sm">
-          Launch App
-        </a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <section class="min-h-screen flex items-center justify-center px-6 pt-24 pb-12 relative">
-    <div class="max-w-5xl mx-auto text-center">
-      <div class="reveal">
-        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8">
-          <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-          <span class="text-sm text-gray-300">Now with GPT-4 & Claude 3.5</span>
-        </div>
-      </div>
-
-      <h1 class="reveal text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-8 tracking-tight">
-        Understand any<br>
-        <span class="gradient-text">company in 3 mins</span>
-      </h1>
-
-      <p class="reveal text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed">
-        AI-powered analysis that transforms complex financial data into
-        clear, actionable insights. Make informed decisions faster.
-      </p>
-
-      <div class="reveal flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <a href="https://qiltrack.com" target="_blank" class="btn-glow px-8 py-4 rounded-xl font-semibold text-lg flex items-center gap-2 group">
-          Start Free Analysis
-          <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-          </svg>
-        </a>
-        <a href="#how-it-works" class="px-8 py-4 rounded-xl font-medium text-gray-300 hover:text-white transition flex items-center gap-2">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-          </svg>
-          See How It Works
-        </a>
-      </div>
-
-      <!-- Stats -->
-      <div class="reveal mt-20 grid grid-cols-3 gap-8 max-w-2xl mx-auto">
-        <div class="text-center">
-          <div class="stat-number text-3xl md:text-4xl font-bold gradient-text">3min</div>
-          <div class="text-sm text-gray-500 mt-1">Avg. Report Time</div>
-        </div>
-        <div class="text-center">
-          <div class="stat-number text-3xl md:text-4xl font-bold gradient-text">50+</div>
-          <div class="text-sm text-gray-500 mt-1">Data Points</div>
-        </div>
-        <div class="text-center">
-          <div class="stat-number text-3xl md:text-4xl font-bold gradient-text">3</div>
-          <div class="text-sm text-gray-500 mt-1">Analysis Styles</div>
-        </div>
-      </div>
+        <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150 mix-blend-overlay"></div>
     </div>
 
-    <!-- Scroll indicator -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-gray-500">
-      <span class="text-xs tracking-widest uppercase">Scroll</span>
-      <div class="w-5 h-8 rounded-full border border-gray-700 flex justify-center pt-2">
-        <div class="w-1 h-2 bg-gray-500 rounded-full animate-bounce"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Product Mockup Section -->
-  <section class="py-24 px-6 relative">
-    <div class="max-w-6xl mx-auto">
-      <div class="reveal mockup-container">
-        <div class="mockup glass-strong rounded-3xl p-2 md:p-4 shine">
-          <div class="bg-dark-800 rounded-2xl overflow-hidden">
-            <!-- Browser chrome -->
-            <div class="flex items-center gap-2 px-4 py-3 border-b border-white/5">
-              <div class="flex gap-1.5">
-                <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
-                <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
-              </div>
-              <div class="flex-1 flex justify-center">
-                <div class="px-4 py-1 bg-dark-700 rounded-lg text-xs text-gray-500 font-mono">qiltrack.com</div>
-              </div>
-            </div>
-            <!-- App preview -->
-            <div class="aspect-[16/9] bg-gradient-to-br from-dark-800 via-dark-700 to-dark-800 p-8 md:p-12">
-              <div class="h-full flex flex-col">
-                <!-- Mock header -->
-                <div class="flex items-center justify-between mb-8">
-                  <div class="flex items-center gap-4">
-                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-accent-purple to-accent-violet"></div>
-                    <div class="h-4 w-24 bg-white/10 rounded"></div>
-                  </div>
-                  <div class="flex gap-3">
-                    <div class="h-8 w-20 bg-white/5 rounded-lg"></div>
-                    <div class="h-8 w-8 bg-accent-purple/20 rounded-lg"></div>
-                  </div>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3 group cursor-pointer">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-violet-500/20 group-hover:shadow-violet-500/40 transition-all">
+                    Q
                 </div>
-                <!-- Mock content -->
-                <div class="flex-1 grid md:grid-cols-3 gap-6">
-                  <div class="md:col-span-2 space-y-4">
-                    <div class="glass rounded-xl p-6">
-                      <div class="flex items-center gap-3 mb-4">
-                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center font-bold">A</div>
-                        <div>
-                          <div class="h-4 w-32 bg-white/20 rounded mb-2"></div>
-                          <div class="h-3 w-20 bg-white/10 rounded"></div>
-                        </div>
-                        <div class="ml-auto text-right">
-                          <div class="text-2xl font-bold text-green-400">92</div>
-                          <div class="text-xs text-gray-500">Score</div>
-                        </div>
-                      </div>
-                      <div class="grid grid-cols-4 gap-3">
-                        <div class="bg-white/5 rounded-lg p-3 text-center">
-                          <div class="text-xs text-gray-500 mb-1">P/E</div>
-                          <div class="font-semibold">28.4</div>
-                        </div>
-                        <div class="bg-white/5 rounded-lg p-3 text-center">
-                          <div class="text-xs text-gray-500 mb-1">Growth</div>
-                          <div class="font-semibold text-green-400">+24%</div>
-                        </div>
-                        <div class="bg-white/5 rounded-lg p-3 text-center">
-                          <div class="text-xs text-gray-500 mb-1">ROE</div>
-                          <div class="font-semibold">156%</div>
-                        </div>
-                        <div class="bg-white/5 rounded-lg p-3 text-center">
-                          <div class="text-xs text-gray-500 mb-1">Margin</div>
-                          <div class="font-semibold">26.3%</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="glass rounded-xl p-4 h-32">
-                      <div class="flex justify-between items-end h-full">
-                        <div class="w-8 bg-gradient-to-t from-accent-purple to-transparent rounded-t" style="height: 60%"></div>
-                        <div class="w-8 bg-gradient-to-t from-accent-purple to-transparent rounded-t" style="height: 75%"></div>
-                        <div class="w-8 bg-gradient-to-t from-accent-purple to-transparent rounded-t" style="height: 45%"></div>
-                        <div class="w-8 bg-gradient-to-t from-accent-purple to-transparent rounded-t" style="height: 90%"></div>
-                        <div class="w-8 bg-gradient-to-t from-accent-purple to-transparent rounded-t" style="height: 70%"></div>
-                        <div class="w-8 bg-gradient-to-t from-accent-purple to-transparent rounded-t" style="height: 85%"></div>
-                        <div class="w-8 bg-gradient-to-t from-accent-pink to-transparent rounded-t" style="height: 95%"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="space-y-4">
-                    <div class="glass rounded-xl p-4">
-                      <div class="text-xs text-gray-500 mb-3">AI Analysis</div>
-                      <div class="space-y-2">
-                        <div class="h-2 bg-white/10 rounded w-full"></div>
-                        <div class="h-2 bg-white/10 rounded w-4/5"></div>
-                        <div class="h-2 bg-white/10 rounded w-full"></div>
-                        <div class="h-2 bg-white/10 rounded w-3/5"></div>
-                      </div>
-                    </div>
-                    <div class="glass rounded-xl p-4">
-                      <div class="text-xs text-gray-500 mb-3">Key Insights</div>
-                      <div class="space-y-2">
-                        <div class="flex items-center gap-2">
-                          <div class="w-1.5 h-1.5 bg-green-400 rounded-full"></div>
-                          <div class="h-2 bg-white/10 rounded flex-1"></div>
-                        </div>
-                        <div class="flex items-center gap-2">
-                          <div class="w-1.5 h-1.5 bg-green-400 rounded-full"></div>
-                          <div class="h-2 bg-white/10 rounded flex-1"></div>
-                        </div>
-                        <div class="flex items-center gap-2">
-                          <div class="w-1.5 h-1.5 bg-yellow-400 rounded-full"></div>
-                          <div class="h-2 bg-white/10 rounded flex-1"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div class="flex flex-col">
+                    <span class="font-bold text-lg tracking-tight">Qiltrack AI</span>
+                    <span class="text-[10px] text-gray-400 font-mono uppercase tracking-wider">Intelligence</span>
                 </div>
-              </div>
             </div>
-          </div>
+            
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#features" class="text-sm text-gray-400 hover:text-white transition-colors">功能特性</a>
+                <a href="#demo" class="text-sm text-gray-400 hover:text-white transition-colors">实机演示</a>
+                <a href="#pricing" class="text-sm text-gray-400 hover:text-white transition-colors">订阅方案</a>
+                <a href="https://github.com/wuji-zen" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                    <i data-lucide="github" class="w-5 h-5"></i>
+                </a>
+            </div>
+
+            <a href="https://qiltrack.com" target="_blank" class="hidden md:flex items-center gap-2 bg-white text-black px-6 py-2.5 rounded-full font-medium hover:bg-gray-100 transition-all hover:scale-105 active:scale-95 text-sm">
+                <span>开始分析</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
         </div>
-      </div>
-    </div>
-  </section>
+    </nav>
 
-  <!-- Features Section -->
-  <section id="features" class="py-24 px-6">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-16">
-        <div class="reveal inline-block px-4 py-1.5 rounded-full glass text-sm text-gray-300 mb-6">
-          Powerful Features
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center pt-32 pb-20 px-6 relative overflow-hidden">
+        <div class="max-w-5xl mx-auto text-center z-10">
+            
+            <!-- Badge -->
+            <div class="gsap-hero-reveal inline-flex items-center gap-2 px-4 py-2 rounded-full border border-violet-500/30 bg-violet-500/10 mb-8 backdrop-blur-sm">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-violet-500"></span>
+                </span>
+                <span class="text-xs font-medium text-violet-200 tracking-wide">全新升级 Qiltrack Engine™ v5.1</span>
+            </div>
+
+            <h1 class="gsap-hero-reveal text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-8 leading-[1.1]">
+                看懂财报，<br>
+                <span class="text-gradient">只需三分钟。</span>
+            </h1>
+
+            <p class="gsap-hero-reveal text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed">
+                搭载 Qiltrack 自研金融大模型，将复杂的机构级数据，转化为清晰、可执行的投资洞察。
+                <br class="hidden md:block" />
+                告别枯燥的表格，拥抱智能化的决策未来。
+            </p>
+
+            <div class="gsap-hero-reveal flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="https://qiltrack.com" target="_blank" class="group w-full sm:w-auto px-8 py-4 bg-white text-black rounded-xl font-semibold text-lg hover:bg-gray-100 transition-all hover:shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)] flex items-center justify-center gap-2">
+                    免费试用
+                    <i data-lucide="zap" class="w-5 h-5 group-hover:text-violet-600 transition-colors"></i>
+                </a>
+                <a href="#how-it-works" class="w-full sm:w-auto px-8 py-4 glass rounded-xl font-medium text-white hover:bg-white/10 transition-all flex items-center justify-center gap-2">
+                    <i data-lucide="play-circle" class="w-5 h-5 text-gray-400"></i>
+                    查看演示
+                </a>
+            </div>
+
+            <!-- Social Proof -->
+            <div class="gsap-hero-reveal mt-20 pt-10 border-t border-white/5">
+                <p class="text-sm text-gray-500 mb-6 uppercase tracking-widest">Powered By Proprietary Tech</p>
+                <div class="flex flex-wrap justify-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                    <!-- Tech Logos (Strategic Rebranding) -->
+                    <div class="flex items-center gap-2"><i data-lucide="cpu" class="w-6 h-6"></i> <span class="font-bold">Qiltrack Core™</span></div>
+                    <div class="flex items-center gap-2"><i data-lucide="database" class="w-6 h-6"></i> <span class="font-bold">Real-time Data</span></div>
+                    <div class="flex items-center gap-2"><i data-lucide="shield-check" class="w-6 h-6"></i> <span class="font-bold">Bank-Grade Security</span></div>
+                    <div class="flex items-center gap-2"><i data-lucide="globe" class="w-6 h-6"></i> <span class="font-bold">Global Markets</span></div>
+                </div>
+            </div>
         </div>
-        <h2 class="reveal text-4xl md:text-5xl font-bold mb-6">
-          Everything you need to<br>
-          <span class="gradient-text">analyze smarter</span>
-        </h2>
-        <p class="reveal text-gray-400 text-lg max-w-2xl mx-auto">
-          Professional-grade tools that were once only available to institutions,
-          now accessible to everyone.
-        </p>
-      </div>
+    </section>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Feature 1 -->
-        <div class="reveal feature-card glass rounded-2xl p-8">
-          <div class="icon-wrapper w-14 h-14 rounded-xl bg-gradient-to-br from-accent-purple/20 to-accent-violet/20 flex items-center justify-center mb-6">
-            <svg class="w-7 h-7 text-accent-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-3">Lightning Analysis</h3>
-          <p class="text-gray-400 leading-relaxed">Generate comprehensive reports in under 3 minutes. What analysts spend hours on, our AI delivers instantly.</p>
+    <!-- Features Bento Grid -->
+    <section id="features" class="py-24 px-6 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16 md:text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6">全方位的<span class="text-violet-400">洞察力</span></h2>
+                <p class="text-gray-400 text-lg">基于数百万份专业财报训练的垂直模型，为您提供像华尔街分析师一样的深度思考框架。</p>
+            </div>
+
+            <div class="bento-grid">
+                <!-- Card 1: Main Feature -->
+                <div class="bento-card md:col-span-2 md:row-span-2 p-8 flex flex-col justify-between group">
+                    <div class="card-glow"></div>
+                    <div class="relative z-10">
+                        <div class="w-12 h-12 rounded-lg bg-violet-500/20 flex items-center justify-center mb-6 text-violet-400">
+                            <i data-lucide="activity" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">多维度智能评级</h3>
+                        <p class="text-gray-400 leading-relaxed mb-8 max-w-md">
+                            传统的 PE/PB 估值已经过时。我们要结合宏观经济、行业趋势、管理层质量以及财务健康度，给出一个立体的评分。
+                        </p>
+                    </div>
+                    <!-- Mockup Animation Container -->
+                    <div class="relative h-64 bg-surface rounded-xl border border-white/5 overflow-hidden group-hover:border-violet-500/30 transition-colors">
+                        <div class="absolute inset-0 p-6 font-mono text-xs text-green-400/80 leading-relaxed overflow-hidden">
+                            <div class="typing-effect">
+                                > Connecting to Qiltrack Engine...<br>
+                                > Analyzing AAPL Financials...<br>
+                                > Revenue Growth: <span class="text-white">Steady (5% YoY)</span><br>
+                                > Profit Margin: <span class="text-white">High (25%+)</span><br>
+                                > Cash Flow: <span class="text-white">Robust</span><br>
+                                > Model Sentiment: <span class="text-violet-400">Positive</span><br>
+                                ><br>
+                                > Generating Insight...<br>
+                                > "The company shows strong resilience despite market headwinds..."
+                            </div>
+                        </div>
+                        <!-- Overlay Gradient -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent"></div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Speed -->
+                <div class="bento-card p-8 group">
+                    <div class="card-glow"></div>
+                    <div class="flex justify-between items-start mb-4">
+                        <i data-lucide="zap" class="w-8 h-8 text-yellow-400"></i>
+                        <span class="text-xs font-mono text-gray-500 border border-white/10 px-2 py-1 rounded">SPEED</span>
+                    </div>
+                    <div class="text-5xl font-bold mb-2 tabular-nums counter-anim" data-target="180">0</div>
+                    <div class="text-sm text-gray-400">秒生成完整报告</div>
+                </div>
+
+                <!-- Card 3: Global -->
+                <div class="bento-card p-8 group">
+                    <div class="card-glow"></div>
+                    <div class="flex justify-between items-start mb-4">
+                        <i data-lucide="globe-2" class="w-8 h-8 text-blue-400"></i>
+                        <span class="text-xs font-mono text-gray-500 border border-white/10 px-2 py-1 rounded">COVERAGE</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">全球市场覆盖</h3>
+                    <p class="text-sm text-gray-400">支持美股 (NYSE/NASDAQ)、港股 (HKEX) 及更多核心市场。</p>
+                </div>
+
+                <!-- Card 4: Education -->
+                <div class="bento-card md:col-span-1 p-8 group">
+                    <div class="card-glow"></div>
+                    <div class="w-10 h-10 rounded-lg bg-pink-500/20 flex items-center justify-center mb-4 text-pink-400">
+                        <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">边看边学</h3>
+                    <p class="text-sm text-gray-400">不仅给结果，更解释原因。内置金融百科，哪里不懂点哪里。</p>
+                </div>
+
+                <!-- Card 5: Styles -->
+                <div class="bento-card md:col-span-2 p-8 flex items-center justify-between group relative overflow-hidden">
+                    <div class="card-glow"></div>
+                    <div class="relative z-10 max-w-xs">
+                        <h3 class="text-xl font-bold mb-2">三种投资视角</h3>
+                        <p class="text-sm text-gray-400">无论你是保守的价值投资者，还是激进的成长股猎手，都能找到专属的分析模式。</p>
+                    </div>
+                    <div class="flex gap-2 absolute right-[-20px] top-1/2 -translate-y-1/2 opacity-50 group-hover:opacity-100 transition-opacity">
+                        <div class="w-24 h-32 bg-surface border border-white/10 rounded-lg p-3 transform rotate-[-10deg] translate-y-4 shadow-xl">
+                            <div class="w-8 h-8 rounded-full bg-blue-500/20 mb-2"></div>
+                            <div class="h-2 w-12 bg-white/10 rounded mb-1"></div>
+                            <div class="h-2 w-16 bg-white/10 rounded"></div>
+                        </div>
+                        <div class="w-24 h-32 bg-surface border border-white/10 rounded-lg p-3 transform rotate-[5deg] z-10 shadow-2xl border-violet-500/50">
+                            <div class="w-8 h-8 rounded-full bg-violet-500/20 mb-2"></div>
+                            <div class="h-2 w-12 bg-white/10 rounded mb-1"></div>
+                            <div class="h-2 w-16 bg-white/10 rounded"></div>
+                        </div>
+                        <div class="w-24 h-32 bg-surface border border-white/10 rounded-lg p-3 transform rotate-[20deg] translate-y-8 shadow-xl">
+                            <div class="w-8 h-8 rounded-full bg-green-500/20 mb-2"></div>
+                            <div class="h-2 w-12 bg-white/10 rounded mb-1"></div>
+                            <div class="h-2 w-16 bg-white/10 rounded"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <!-- Feature 2 -->
-        <div class="reveal feature-card glass rounded-2xl p-8">
-          <div class="icon-wrapper w-14 h-14 rounded-xl bg-gradient-to-br from-accent-purple/20 to-accent-violet/20 flex items-center justify-center mb-6">
-            <svg class="w-7 h-7 text-accent-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-3">Multi-Perspective View</h3>
-          <p class="text-gray-400 leading-relaxed">Choose from Value, Growth, or Balanced analysis. See opportunities from different investment philosophies.</p>
+    <!-- How It Works (Steps) -->
+    <section id="how-it-works" class="py-24 px-6 border-t border-white/5">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8">简单三步，<br>开启智能分析</h2>
+                    
+                    <div class="space-y-8">
+                        <div class="flex gap-4 step-trigger" data-step="1">
+                            <div class="flex-shrink-0 w-8 h-8 rounded-full border border-violet-500 flex items-center justify-center text-violet-400 font-bold">1</div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2 text-white">输入代码</h3>
+                                <p class="text-gray-400">输入你感兴趣的股票代码（如 AAPL, 9988.HK）。</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 step-trigger" data-step="2">
+                            <div class="flex-shrink-0 w-8 h-8 rounded-full border border-gray-700 flex items-center justify-center text-gray-500 font-bold group-hover:border-violet-500 transition-colors">2</div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2 text-gray-300">选择风格</h3>
+                                <p class="text-gray-400">选择侧重“价值”、“成长”或“平衡”的分析模型。</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 step-trigger" data-step="3">
+                            <div class="flex-shrink-0 w-8 h-8 rounded-full border border-gray-700 flex items-center justify-center text-gray-500 font-bold">3</div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2 text-gray-300">获取报告</h3>
+                                <p class="text-gray-400">Qiltrack Engine™ 实时检索并计算数据，3分钟内生成深度研报。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative h-[500px] w-full glass rounded-2xl border border-white/10 p-4 flex items-center justify-center bg-gradient-to-br from-surface to-[#050505]">
+                    <!-- Abstract Visualization of the Step -->
+                    <div class="absolute inset-0 overflow-hidden rounded-2xl">
+                         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-violet-600/20 blur-[80px] rounded-full animate-pulse-slow"></div>
+                    </div>
+                    <div class="relative z-10 text-center">
+                        <i data-lucide="search" class="w-16 h-16 text-white/20 mx-auto mb-4"></i>
+                        <div class="text-2xl font-mono text-white/50">SEARCHING...</div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <!-- Feature 3 -->
-        <div class="reveal feature-card glass rounded-2xl p-8">
-          <div class="icon-wrapper w-14 h-14 rounded-xl bg-gradient-to-br from-accent-purple/20 to-accent-violet/20 flex items-center justify-center mb-6">
-            <svg class="w-7 h-7 text-accent-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-3">AI-Powered Insights</h3>
-          <p class="text-gray-400 leading-relaxed">GPT-4 and Claude analyze data to surface key insights, risks, and opportunities you might miss.</p>
+    <!-- Pricing (Simplified) -->
+    <section id="pricing" class="py-24 px-6 relative">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-5xl font-bold mb-12">投资你的<span class="text-violet-400">投资未来</span></h2>
+            
+            <div class="grid md:grid-cols-2 gap-6 items-center">
+                <!-- Free Plan -->
+                <div class="glass p-8 rounded-2xl border border-white/5 text-left hover:border-white/10 transition-all">
+                    <h3 class="text-xl font-bold mb-2">免费版</h3>
+                    <div class="text-3xl font-bold mb-6">$0 <span class="text-sm font-normal text-gray-400">/ 月</span></div>
+                    <ul class="space-y-4 mb-8 text-gray-400 text-sm">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> 每月 3 份深度报告</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> 基础数据访问</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> 社区支持</li>
+                    </ul>
+                    <a href="https://qiltrack.com" class="block w-full py-3 rounded-lg border border-white/10 text-center hover:bg-white/5 transition-colors">开始免费使用</a>
+                </div>
+
+                <!-- Pro Plan -->
+                <div class="glass p-8 rounded-2xl border border-violet-500/30 bg-violet-500/5 text-left relative overflow-hidden transform md:scale-105 shadow-2xl shadow-violet-900/20">
+                    <div class="absolute top-0 right-0 bg-violet-600 text-xs font-bold px-3 py-1 rounded-bl-lg">POPULAR</div>
+                    <h3 class="text-xl font-bold mb-2 text-white">专业版</h3>
+                    <div class="text-3xl font-bold mb-6">$19 <span class="text-sm font-normal text-gray-400">/ 月</span></div>
+                    <ul class="space-y-4 mb-8 text-gray-300 text-sm">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-violet-400"></i> 每月 30 份深度报告</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-violet-400"></i> 优先使用 Qiltrack Pro 引擎</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-violet-400"></i> 解锁所有分析风格</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-violet-400"></i> 优先客户支持</li>
+                    </ul>
+                    <a href="https://qiltrack.com" class="block w-full py-3 rounded-lg bg-violet-600 text-white font-medium text-center hover:bg-violet-700 transition-colors shadow-lg shadow-violet-600/25">升级专业版</a>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <!-- Feature 4 -->
-        <div class="reveal feature-card glass rounded-2xl p-8">
-          <div class="icon-wrapper w-14 h-14 rounded-xl bg-gradient-to-br from-accent-purple/20 to-accent-violet/20 flex items-center justify-center mb-6">
-            <svg class="w-7 h-7 text-accent-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-3">Global Coverage</h3>
-          <p class="text-gray-400 leading-relaxed">Analyze companies from major exchanges worldwide. US, China, Hong Kong, and more markets supported.</p>
+    <!-- Footer -->
+    <footer class="py-12 border-t border-white/5 bg-[#02000d]">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-white/80">Q</div>
+                <span class="text-gray-400 text-sm">© 2024 Qiltrack AI</span>
+            </div>
+            
+            <div class="flex gap-6 text-sm text-gray-500">
+                <a href="#" class="hover:text-white transition-colors">Privacy</a>
+                <a href="#" class="hover:text-white transition-colors">Terms</a>
+                <a href="https://x.com/wuji_zen" target="_blank" class="hover:text-white transition-colors">Twitter</a>
+                <a href="https://github.com/wuji-zen" target="_blank" class="hover:text-white transition-colors">GitHub</a>
+            </div>
         </div>
+    </footer>
 
-        <!-- Feature 5 -->
-        <div class="reveal feature-card glass rounded-2xl p-8">
-          <div class="icon-wrapper w-14 h-14 rounded-xl bg-gradient-to-br from-accent-purple/20 to-accent-violet/20 flex items-center justify-center mb-6">
-            <svg class="w-7 h-7 text-accent-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-3">Learn As You Go</h3>
-          <p class="text-gray-400 leading-relaxed">Built-in glossary and explanations help you understand financial concepts while researching.</p>
-        </div>
+    <!-- GSAP Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
 
-        <!-- Feature 6 -->
-        <div class="reveal feature-card glass rounded-2xl p-8">
-          <div class="icon-wrapper w-14 h-14 rounded-xl bg-gradient-to-br from-accent-purple/20 to-accent-violet/20 flex items-center justify-center mb-6">
-            <svg class="w-7 h-7 text-accent-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-3">Scoring System</h3>
-          <p class="text-gray-400 leading-relaxed">Proprietary scoring algorithm evaluates companies across multiple dimensions for quick assessment.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+        // GSAP Setup
+        gsap.registerPlugin(ScrollTrigger);
 
-  <!-- How It Works -->
-  <section id="how-it-works" class="py-24 px-6">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-16">
-        <div class="reveal inline-block px-4 py-1.5 rounded-full glass text-sm text-gray-300 mb-6">
-          Simple Process
-        </div>
-        <h2 class="reveal text-4xl md:text-5xl font-bold mb-6">
-          How it <span class="gradient-text">works</span>
-        </h2>
-        <p class="reveal text-gray-400 text-lg">Three steps to smarter company analysis</p>
-      </div>
+        // Hero Reveal
+        const timeline = gsap.timeline();
+        timeline.from(".gsap-hero-reveal", {
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.15,
+            ease: "power3.out"
+        });
 
-      <div class="grid md:grid-cols-3 gap-8 relative">
-        <!-- Connection line -->
-        <div class="hidden md:block absolute top-24 left-1/4 right-1/4 h-0.5 bg-gradient-to-r from-accent-purple via-accent-violet to-accent-purple"></div>
+        // Feature Cards Float
+        gsap.utils.toArray('.bento-card').forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 85%",
+                },
+                y: 50,
+                opacity: 0,
+                duration: 0.8,
+                delay: i * 0.1,
+                ease: "power2.out"
+            });
+        });
 
-        <!-- Step 1 -->
-        <div class="reveal text-center relative">
-          <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-accent-purple to-accent-violet flex items-center justify-center mx-auto mb-6 relative z-10">
-            <span class="text-3xl font-bold">1</span>
-          </div>
-          <h3 class="text-xl font-semibold mb-3">Enter Symbol</h3>
-          <p class="text-gray-400">Type any ticker symbol like AAPL, TSLA, or BABA to begin your analysis</p>
-        </div>
-
-        <!-- Step 2 -->
-        <div class="reveal text-center relative">
-          <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-accent-purple to-accent-violet flex items-center justify-center mx-auto mb-6 relative z-10">
-            <span class="text-3xl font-bold">2</span>
-          </div>
-          <h3 class="text-xl font-semibold mb-3">Choose Style</h3>
-          <p class="text-gray-400">Select Value, Growth, or Balanced analysis based on your preference</p>
-        </div>
-
-        <!-- Step 3 -->
-        <div class="reveal text-center relative">
-          <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-accent-purple to-accent-violet flex items-center justify-center mx-auto mb-6 relative z-10">
-            <span class="text-3xl font-bold">3</span>
-          </div>
-          <h3 class="text-xl font-semibold mb-3">Get Insights</h3>
-          <p class="text-gray-400">Receive comprehensive AI analysis with scores, metrics, and actionable insights</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Pricing Section -->
-  <section id="pricing" class="py-24 px-6">
-    <div class="max-w-5xl mx-auto">
-      <div class="text-center mb-16">
-        <div class="reveal inline-block px-4 py-1.5 rounded-full glass text-sm text-gray-300 mb-6">
-          Simple Pricing
-        </div>
-        <h2 class="reveal text-4xl md:text-5xl font-bold mb-6">
-          Start <span class="gradient-text">free</span>, upgrade anytime
-        </h2>
-        <p class="reveal text-gray-400 text-lg">No credit card required. Cancel anytime.</p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6">
-        <!-- Free -->
-        <div class="reveal pricing-card glass rounded-2xl p-8">
-          <div class="text-sm text-gray-400 mb-2">Free</div>
-          <div class="flex items-baseline gap-1 mb-6">
-            <span class="text-4xl font-bold">$0</span>
-            <span class="text-gray-500">/month</span>
-          </div>
-          <ul class="space-y-4 mb-8">
-            <li class="flex items-center gap-3 text-gray-300">
-              <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
-              3 reports per month
-            </li>
-            <li class="flex items-center gap-3 text-gray-300">
-              <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
-              Basic analysis
-            </li>
-            <li class="flex items-center gap-3 text-gray-300">
-              <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
-              Report Hub access
-            </li>
-          </ul>
-          <a href="https://qiltrack.com" target="_blank" class="block w-full py-3 rounded-xl border border-white/10 text-center font-medium hover:bg-white/5 transition">
-            Get Started
-          </a>
-        </div>
-
-        <!-- Pro -->
-        <div class="reveal pricing-card featured glass rounded-2xl p-8 relative">
-          <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-gradient-to-r from-accent-purple to-accent-violet rounded-full text-xs font-medium">
-            Popular
-          </div>
-          <div class="text-sm text-accent-purple mb-2">Pro</div>
-          <div class="flex items-baseline gap-1 mb-6">
-            <span class="text-4xl font-bold">$19</span>
-            <span class="text-gray-500">/month</span>
-          </div>
-          <ul class="space-y-4 mb-8">
-            <li class="flex items-center gap-3 text-gray-300">
-              <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
-              30 reports per month
-            </li>
-            <li class="flex items-center gap-3 text-gray-300">
-              <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
-              Advanced AI models
-            </li>
-            <li class="flex items-center gap-3 text-gray-300">
-              <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
-              All analysis styles
-            </li>
-            <li class="flex items-center gap-3 text-gray-300">
-              <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
-              Priority support
-            </li>
-          </ul>
-          <a href="https://qiltrack.com" target="_blank" class="btn-glow block w-full py-3 rounded-xl text-center font-medium">
-            Upgrade to Pro
-          </a>
-        </div>
-
-        <!-- Ultra -->
-        <div class="reveal pricing-card glass rounded-2xl p-8">
-          <div class="text-sm text-gray-400 mb-2">Ultra</div>
-          <div class="flex items-baseline gap-1 mb-6">
-            <span class="text-4xl font-bold">$49</span>
-            <span class="text-gray-500">/month</span>
-          </div>
-          <ul class="space-y-4 mb-8">
-            <li class="flex items-center gap-3 text-gray-300">
-              <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
-              Unlimited reports
-            </li>
-            <li class="flex items-center gap-3 text-gray-300">
-              <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
-              GPT-4 & Claude 3.5
-            </li>
-            <li class="flex items-center gap-3 text-gray-300">
-              <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
-              API access
-            </li>
-            <li class="flex items-center gap-3 text-gray-300">
-              <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
-              Early feature access
-            </li>
-          </ul>
-          <a href="https://qiltrack.com" target="_blank" class="block w-full py-3 rounded-xl border border-white/10 text-center font-medium hover:bg-white/5 transition">
-            Go Ultra
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ Section -->
-  <section id="faq" class="py-24 px-6">
-    <div class="max-w-3xl mx-auto">
-      <div class="text-center mb-16">
-        <div class="reveal inline-block px-4 py-1.5 rounded-full glass text-sm text-gray-300 mb-6">
-          FAQ
-        </div>
-        <h2 class="reveal text-4xl md:text-5xl font-bold">
-          Common <span class="gradient-text">questions</span>
-        </h2>
-      </div>
-
-      <div class="space-y-4">
-        <!-- FAQ 1 -->
-        <div class="reveal faq-item glass rounded-xl cursor-pointer" onclick="toggleFaq(this)">
-          <div class="flex items-center justify-between p-6">
-            <span class="font-medium">What is Qiltrack AI?</span>
-            <span class="faq-icon text-2xl text-gray-400">+</span>
-          </div>
-          <div class="faq-answer px-6 pb-6 text-gray-400">
-            Qiltrack AI is an educational platform that uses AI to help you understand companies quickly. We analyze financial data and present it in clear, easy-to-understand reports with multiple perspectives.
-          </div>
-        </div>
-
-        <!-- FAQ 2 -->
-        <div class="reveal faq-item glass rounded-xl cursor-pointer" onclick="toggleFaq(this)">
-          <div class="flex items-center justify-between p-6">
-            <span class="font-medium">Is this investment advice?</span>
-            <span class="faq-icon text-2xl text-gray-400">+</span>
-          </div>
-          <div class="faq-answer px-6 pb-6 text-gray-400">
-            No. Qiltrack AI is an educational tool, not a financial advisor. We help you learn about and explore market data, but we do not provide investment advice or recommendations. Always consult qualified professionals for financial decisions.
-          </div>
-        </div>
-
-        <!-- FAQ 3 -->
-        <div class="reveal faq-item glass rounded-xl cursor-pointer" onclick="toggleFaq(this)">
-          <div class="flex items-center justify-between p-6">
-            <span class="font-medium">What markets are supported?</span>
-            <span class="faq-icon text-2xl text-gray-400">+</span>
-          </div>
-          <div class="faq-answer px-6 pb-6 text-gray-400">
-            We support major exchanges including NYSE, NASDAQ, Hong Kong Stock Exchange, Shanghai, and Shenzhen exchanges. We're continuously expanding our coverage to include more global markets.
-          </div>
-        </div>
-
-        <!-- FAQ 4 -->
-        <div class="reveal faq-item glass rounded-xl cursor-pointer" onclick="toggleFaq(this)">
-          <div class="flex items-center justify-between p-6">
-            <span class="font-medium">How accurate is the AI analysis?</span>
-            <span class="faq-icon text-2xl text-gray-400">+</span>
-          </div>
-          <div class="faq-answer px-6 pb-6 text-gray-400">
-            Our AI uses real-time data from reliable financial sources and applies sophisticated analysis models. However, all analysis is for educational purposes and should be verified independently before making any decisions.
-          </div>
-        </div>
-
-        <!-- FAQ 5 -->
-        <div class="reveal faq-item glass rounded-xl cursor-pointer" onclick="toggleFaq(this)">
-          <div class="flex items-center justify-between p-6">
-            <span class="font-medium">Can I cancel my subscription anytime?</span>
-            <span class="faq-icon text-2xl text-gray-400">+</span>
-          </div>
-          <div class="faq-answer px-6 pb-6 text-gray-400">
-            Yes! You can cancel your subscription at any time with no questions asked. Your access will continue until the end of your billing period.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="py-24 px-6">
-    <div class="max-w-4xl mx-auto">
-      <div class="reveal glass-strong rounded-3xl p-12 md:p-16 text-center relative overflow-hidden">
-        <!-- Background decoration -->
-        <div class="absolute inset-0 opacity-30">
-          <div class="absolute top-0 left-0 w-64 h-64 bg-accent-purple rounded-full filter blur-[100px]"></div>
-          <div class="absolute bottom-0 right-0 w-64 h-64 bg-accent-violet rounded-full filter blur-[100px]"></div>
-        </div>
-
-        <div class="relative z-10">
-          <h2 class="text-3xl md:text-5xl font-bold mb-6">
-            Ready to understand<br>
-            <span class="gradient-text">companies better?</span>
-          </h2>
-          <p class="text-lg text-gray-400 mb-10 max-w-xl mx-auto">
-            Join thousands of users who are making smarter decisions with AI-powered insights.
-          </p>
-          <a href="https://qiltrack.com" target="_blank" class="btn-glow inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-lg group">
-            Get Started Free
-            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-            </svg>
-          </a>
-          <p class="mt-4 text-sm text-gray-500">No credit card required</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="py-12 px-6 border-t border-white/5">
-    <div class="max-w-6xl mx-auto">
-      <div class="flex flex-col md:flex-row justify-between items-center gap-8">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-accent-purple to-accent-violet flex items-center justify-center">
-            <span class="font-bold text-lg">Q</span>
-          </div>
-          <div>
-            <div class="font-semibold">Qiltrack AI</div>
-            <div class="text-xs text-gray-500">Business Education Platform</div>
-          </div>
-        </div>
-
-        <div class="flex items-center gap-6">
-          <a href="https://qiltrack.com" target="_blank" class="text-gray-400 hover:text-white transition text-sm">Website</a>
-          <a href="https://x.com/wuji_zen" target="_blank" class="text-gray-400 hover:text-white transition text-sm">Twitter</a>
-          <a href="https://github.com/wuji-zen" target="_blank" class="text-gray-400 hover:text-white transition text-sm">GitHub</a>
-        </div>
-
-        <div class="text-sm text-gray-500">
-          &copy; 2024 Qiltrack AI. All rights reserved.
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    // Scroll reveal animation
-    function reveal() {
-      const reveals = document.querySelectorAll('.reveal');
-      reveals.forEach(element => {
-        const windowHeight = window.innerHeight;
-        const elementTop = element.getBoundingClientRect().top;
-        const elementVisible = 150;
-
-        if (elementTop < windowHeight - elementVisible) {
-          element.classList.add('active');
+        // Number Counter Animation
+        const counter = document.querySelector('.counter-anim');
+        if (counter) {
+            ScrollTrigger.create({
+                trigger: counter,
+                start: "top 80%",
+                once: true,
+                onEnter: () => {
+                    gsap.to(counter, {
+                        innerText: 180,
+                        duration: 2,
+                        snap: { innerText: 1 },
+                        ease: "power2.out"
+                    });
+                }
+            });
         }
-      });
-    }
 
-    window.addEventListener('scroll', reveal);
-    window.addEventListener('load', reveal);
-
-    // FAQ toggle
-    function toggleFaq(element) {
-      const wasActive = element.classList.contains('active');
-
-      // Close all FAQs
-      document.querySelectorAll('.faq-item').forEach(item => {
-        item.classList.remove('active');
-      });
-
-      // Open clicked one if it wasn't active
-      if (!wasActive) {
-        element.classList.add('active');
-      }
-    }
-
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-  </script>
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('glass-nav');
+                nav.classList.remove('bg-transparent');
+            } else {
+                // Keep it glass-nav always for consistency, or adjust as needed
+                // For this design, let's keep it consistent
+            }
+        });
+    </script>
 </body>
 </html>
