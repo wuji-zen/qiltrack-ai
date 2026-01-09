@@ -7,8 +7,7 @@
 > 
 > Qiltrack AI transforms complex financial data into clear, actionable investment insights using our proprietary **Qiltrack Financial Engine™**.
 
-![Qiltrack AI Hero](https://qiltrack.com/og-image.jpg) 
-*(Note: Replace with your actual screenshot/banner URL)*
+![Qiltrack AI Hero](./hero.png) 
 
 ## ✨ Features
 
